@@ -1,0 +1,43 @@
+<div class="col s12">
+   <h1 class="xl-text m-v-margin bold">{{ user.names}} </h1>
+   {{#if user.username }} 
+   <div class="m-v-margin">Identifier: <b>@{{user.username}}</b></div>
+   <div><a href="#"><span class="fas fa-pen grey-text"></span> Change name</a></div>
+   {{else}}
+   <div class="m-v-margin l-padding red darken-1 white-text">You need to setup a user name in order to continue.    
+       <a href="#change-username" class="right white-text modal-trigger">
+         <fas class="fas fa-pen white-text"></fas> Create username
+      </a>
+    </div>
+   {{/if}}
+   <br>
+
+   {{#if user.username }}
+   <h1 class="l-text m-v-margin">Motto</h1>
+      {{#if user.motto }}  
+         {{ user.motto }}
+      {{else}}
+         Full stack developer, blogger and thinker.
+      {{/if}}  
+      <div><a href="#"><span class="fas fa-plus grey-text"></span> Update</a></div>
+   <br>
+
+   
+
+   <h1 class="l-text m-v-margin">Bio</h1>
+      {{#if user.bio }}  
+         {{ user.bio }}
+      {{else}}
+         You didn't set your biograph yet!
+      {{/if}}  
+      <div><a href="#"><span class="fas fa-plus grey-text"></span> Update</a></div>
+   <br>
+
+   <h1 class="l-text m-v-margin">Settings</h1>      
+   <div><a href="#" class="btn grey lighten-2 z-depth-0"><span class="fas fa-pen grey-text"></span> Update</a></div>
+   <br>
+
+   {{/if}}
+
+   
+</div>

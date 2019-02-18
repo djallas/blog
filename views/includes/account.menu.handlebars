@@ -1,0 +1,13 @@
+<nav class="white z-depth-0 userNav">
+    <div class="nav-wrapper">
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="/"> <span class="fas fa-user grey-text"></span> Profile</a></li>
+        {{#if user.username }} 
+        <li><a href="/"> <span class="fas fa-signature grey-text"></span> Stories</a></li>
+        <li><a href="/"> <span class="fas fa-question grey-text"></span> My Questions</a></li>
+        <li><a href="/"> <span class="fas fa-fingerprint grey-text"></span> Snaps</a></li>
+        <li><a href="/"> <span class="fas fa-cog grey-text"></span> Settings</a></li>
+        {{/if}}
+      </ul>
+    </div>
+</nav>

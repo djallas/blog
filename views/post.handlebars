@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Welcome to Nivelo</title>
+   <link rel="icon" href="../public/images/icon.png">
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="../public/css/materialize.min.css">
+   <link rel="stylesheet" href="../public/css/layout.css">
+   <script src="../public/js/jquery-3.2.1.min.js"></script>
+   <!-- Compiled and minified JavaScript -->
+   <script src="../public/js/materialize.min.js"></script>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <style>
+    textarea.materialize-textarea{height: auto;}
+    .message{font-size:20px;color:#202020}
+  </style>
+</head>
+<body>
+    {{#unless error }}
+      <form class="col s12" id="updatePost" action="/" method="POST">
+        <div class="navbar-fixed">
+          <nav class="grey lighten-5 z-depth-0" style="border-bottom:1px solid #dedede">
+            <div class="container">
+              <div class="nav-wrapper">
+                <div class="row">
+                  <div class="col s2"><a href="/posts" class="btn white border b-lite z-depth-0"> <span class="fas fa-arrow-left"></span> Back</a></div>
+                  <div class="col s8 message center-align">Editing</div>
+                  <div class="col s2"><button type="submit" class="btn white border b-lite black-text z-depth-0"> <span class="fas fa-save"></span> Save</button></div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="error center-align l-padding" style="background:red;color:#ffffff;display:none"></div>
+        <div class="container">
+          {{!-- start form --}}
+            <div class="row nm np">
+              <div class="input-field col s12 nm np">
+                <textarea id="title" name="title" class="materialize-textarea" style="font-size:35px!important;border:none!important" placeholder="Title" value="{{post.title}}">{{post.title}}</textarea>
+              </div>
+            </div> 
+            <div class="row nm np">
+              <div class="input-field col s12 nm np">
+                <textarea id="summary" name="summary" class="materialize-textarea"  style="font-size:22px!important;border:none!important"  placeholder="Summary" value="{{post.summary}}">{{post.summary}}</textarea>
+            </div>
+            <div class="row nm np">
+              <div class="input-field col s12 nm np">
+                <textarea id="content" class="materialize-textarea" value="{{post.content}}">{{post.content}}</textarea>
+            </div>
+          </div>
+          <input type="hidden" id="id" name="id" value="{{post.id}}">
+          {{!-- end form --}}
+        </div>
+      </form>
+    {{else}}
+    <div class="container">
+      <div class="row center-align">
+        <div class="image">
+          <img src="../public/images/404.png" style="width:350px;height:auto" alt="Error 404">
+        </div>
+        <h3 class="bold">Sorry, no post found!</h3>
+        <a href="/posts" class="btn grey darken-3 white-text z-depth-0">Return to Posts</a>
+    </div>
+    {{/unless}}
+    <script>
+   // var editor = new Simditor({
+      //textarea: $('#editor')
+    //});
+    var simplemde = new SimpleMDE({ element: document.getElementById("content") });
+    </script>
+    <script src="../public/js/put.js"></script>
+</body>
+</html>

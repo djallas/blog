@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Welcome to Nivelo</title>
+   <link rel="icon" href="public/images/icon.png">
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="public/css/materialize.min.css">
+   <script src="public/js/jquery-3.2.1.min.js"></script>
+   <!-- Compiled and minified JavaScript -->
+   <script src="public/js/materialize.min.js"></script>
+   <link rel="stylesheet" href="public/css/layout.css">
+   {{!-- fonts --}}
+   <link rel="stylesheet" href="public/css/all.css">
+</head>
+<body>
+
+  {{{body}}}
+  {{#if user.username }} 
+  <div class="message center-align l-padding" style="color:#ffffff;display:none;position:absolute;bottom:0;width:100%;"></div>
+  <!-- Modal Structure -->
+  <div id="create" class="modal">
+    <form class="col s12" action="/" method="POST">
+    <div class="modal-content">
+      <h4>Title</h4>
+      <div class="grey-text text-darken-2">Start by typing the title of the post. You can be able to change it later.</div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="title" name="title" type="text" value="" autocomplete="off" class="validate">
+          <label for="title" class="active">Title</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="l-h-padding">
+        <span class="right l-padding">Loading...</span>
+        <button type="submit" class="indigo white-text waves-effect waves-green btn-flat left">Create</button>
+        <button type="button" class="modal-close waves-effect waves-green btn-flat left">Cancel</button>
+      </div>
+    </div>
+      </form>
+  </div>
+{{/if}}
+{{!-- sidebar --}}
+{{#if user.names }}
+  <ul id="slide-out" class="side-nav fixed">
+      <li class="indigo"><div class="user-view">
+        <div class="background">
+          <img src="public/images/avatar.png">
+        </div>
+        <a href="#!user"><img class="circle grey lighten-4" src="public/images/avatar.png"></a>
+        <a href="#!name"><span class="white-text name">{{ user.names }}</span></a>
+        <a href="#!email"><span class="white-text email">{{user.username }}</span></a>
+      </div></li>
+      <li><a class=" modal-trigger" href="#create"><span class="fas fa-plus fa-lg"></span> Write New</a></li>
+      <li><a href="/posts"><span class="fas fa-bars fa-lg"></span> Posts</a></li>
+      <li><a href="/comments"><span class="fas fa-comment fa-lg"></span> Comments</a></li>
+      <li><a href="/Imagery"><span class="fas fa-image fa-lg"></span> Imagery</a></li>        
+      <li><a href="/me"><span class="fas fa-user-circle fa-lg"></span> My Profile</a></li>
+      <li><a href="/logout"><span class="fas fa-plus fa-lg"></span> Logout</a></li>      
+  </ul>
+{{/if}}
+   <script>
+     $(document).ready(function(){
+       
+       $('.dropdown-trigger').dropdown({
+         coverTrigger: false,
+         alignment:'right'
+       });
+       //pop modals
+       $('.modal').modal();
+       $(".button-collapse").sideNav();
+     })
+     $("#create").submit(function(e){
+       $(".message").show().addClass("grey").html("Wait, Creating post...");
+       e.preventDefault();
+        const url = 'https://kigali.herokuapp.com/posts'
+        var title =  $('#title').val();
+        var logo =  "https://via.placeholder.com/400x300.png?text=KIGALI";
+        if(title.length > 5 && title.length < 120 ){
+          var values = { title:title, logo:logo};
+          values = JSON.stringify(values);
+          $.ajax({  
+              url: url,  
+              type: 'POST',  
+              dataType: 'json', 
+              data:values,
+              contentType: 'application/json; charset=utf-8',
+              timeout: 20000,  
+              success: function (data, textStatus, xhr) {  
+                $(".message").show().addClass("grey").html(data.message);
+              },
+              error: function (xhr, textStatus, errorThrown) {
+                  if(textStatus==="timeout") {
+                    $(".message").show().addClass("red").html("Whooch, the server is taking to long time to respond!");
+                  } else {
+                    console.log(data.message);
+                    $(".message").show().addClass("red").html(data.message);
+                  } 
+              }  
+          });
+        }else{
+          alert('Title must be 5 to 120 characters');
+        }
+     })
+   </script>
+</body>
+</html>

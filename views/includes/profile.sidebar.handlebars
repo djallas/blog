@@ -1,0 +1,63 @@
+{{!-- profile card --}}
+<div class="col s12 m12 l2 np">
+  {{!-- profile avatar --}}
+  <div class="profile grey lighten-3 hide-on-med-and-down">
+    <img src="public/images/avatar.png" alt="{{ user.names }}">
+  </div>
+  <h1 class="truncate m-v-margin np l-text">{{ user.names }}</h1>
+  {{!-- username --}}
+  <div class="l-v-margin"> 
+    {{#if user.username }}  
+      @{{ user.username }}
+     {{else}}
+      @username
+     {{/if}} 
+    <a href="#change-username" class="right modal-trigger">
+      <fas class="fas fa-pen grey-text"></fas>
+    </a>
+  </div>
+  <div class="divider grey clear lighten-3"></div>
+  
+  {{#if user.username }} 
+  {{!-- bio --}}  
+  <div class="l-v-margin"> 
+    <div class="grey-text">Bio</div> 
+    {{#if user.motto }}  
+     {{ user.motto }}
+     {{else}}
+     Full stack developer, blogger and thinker.
+     {{/if}}     
+    <a href="#" class="right">
+      <fas class="fas fa-pen grey-text"></fas>
+    </a>
+  </div>
+  <div class="divider grey clear lighten-3"></div>
+
+  {{!-- navi --}}  
+  <div class="l-v-margin"> 
+    <a href="#" class="btn col s12 grey lighten-3 z-depth-0 center-align">Go to profile</a>
+    <a href="/auth/logout" class="btn col s12 grey lighten-4 z-depth-0 center-align" style="margin-top:10px">Logout</a>
+  </div> 
+  {{/if}}
+</div>
+<!-- Modal Structure -->
+  <div id="change-username" class="modal">
+    <form class="col s12" action="/api/v1/users/{{user.id}}/username" method="POST">
+    <div class="modal-content">
+      <h4>Change <b>@username</b></h4>
+      <div class="row">
+        <div class="input-field col s12">
+            <input placeholder="Type your username" value="{{ user.username }}" autocomplete="off" name="username" id="username" type="text" class="validate">
+            <label for="username">Username</label>
+        </div>
+        <input type="hidden" name="_method" value="PUT"/>
+        <input type="hidden" name="id" value="{{user.id}}"/>
+      </div>
+      <div>This is the keyword to identify you. Choose it wisely, you will be able to change it later.</div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+      <button type="submit" class="modal-close waves-effect green white-text waves-green btn-flat">Change</button>
+    </div>
+    </form>
+  </div>

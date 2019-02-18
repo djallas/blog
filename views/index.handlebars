@@ -1,0 +1,25 @@
+<style>
+  body{background:url('public/images/bridge.jpg') no-repeat center top}
+</style>
+<div class="bg">
+  <div class="valign-wrapper">
+    <div class="container white-text">
+      <br><br>
+      <div class="row center" style="width:1px;height:450px;" >
+      </div>
+      <h1 class="header center nm" style="opacity:0.4">Seems like you are lost!</h1>
+      <div class="center-align" style="font-size:19px;opacity:0.9">Atleast enjoy the view!</div>
+      <br><br>
+
+  </div>
+  </div>
+</div>
+
+  <script>
+    $(document).ready(function(){
+      var h = $(this).height();
+      $(".bg").css({
+        "height": h+"px"
+      });
+    });
+  </script>
