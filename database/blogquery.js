@@ -43,6 +43,7 @@ const getPulicAll = () => Posts()
 ;
 const getPublicOne = id => Posts()
   .where('id', id)
+  .column('id','title','summary','content','logo','state','created_at')
   .first();
 // #END Public API Query
 module.exports = {
