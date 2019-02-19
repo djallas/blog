@@ -10,6 +10,7 @@ const getAll = () => Posts().select()
   .orderBy('id', 'desc')
 ;
 
+
 // this is to get one post from the db
 const getOne = id => Posts()
   .where('id',id)
@@ -26,17 +27,30 @@ const update = (post) => Posts()
   .update(post);
 
 // create a new blog post
-const create = blog => Posts().insert(blog, ['id','title']);
+const create = blog => Posts()
+.insert(blog, ['id','title']);
 
 const deletePost = blogID => Posts()
   .where('id', parseInt(blogID))
   .del();
 
+// Public API Query
+const getPulicAll = () => Posts()
+  .select()
+  // .where('state','online')
+  .orderBy('id', 'desc')
+;
+const getPublicOne = id => Posts()
+  .where('id', id)
+  .first();
+// #END Public API Query
 module.exports = {
   getAll,
   getOne,
   publish,
   create,
   deletePost,
-  update
+  update,
+  getPulicAll,
+  getPublicOne,
 };

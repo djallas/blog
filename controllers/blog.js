@@ -115,6 +115,52 @@ export default class Post {
         }
       });
   }
+
+  // public api
+  static getPublicAllPosts(req, res){
+    queryblog
+    .getPulicAll()
+    .then((posts) => {
+      res.status(200).send({
+        posts: posts
+      });      
+    })
+    .catch((err) => {
+      res
+      .status(500)
+      .send({
+        error:false,
+        message:err
+      });
+    });
+  }
+  
+  // query one post from the database
+  static getPublicOnePost(req, res) {
+    const id = parseInt(req.params.id);
+    queryblog
+      .getPublicOne(id)
+      .then(post => {
+        if(post){
+          res.status(200)
+          .send({
+            post:post
+          })
+        }else{
+          res
+          .send({
+            error:true,
+            message:"We can not find the post you are looking for!"
+          })
+        }
+      })
+      .catch((err) => {
+        res.send({
+          message: 'invalid id',
+          err,
+        });
+      });
+  }
 }
 
 function validatePostOnUpdate(post){
