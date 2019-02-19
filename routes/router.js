@@ -4,12 +4,12 @@ import Post from '../controllers/blog';
 import User from '../controllers/user';
 import passport  from 'passport';
 
-// import passportSetup from '../config/passport-setup';
+import passportSetup from '../config/passport-setup';
 
 const router = express.Router();
 
 // check auth
-// import verifyAuth from '../middleware/verifyAuth';
+import verifyAuth from '../middleware/verifyAuth';
 
 // check if auth
 const authCheck = (req, res, next) => {
