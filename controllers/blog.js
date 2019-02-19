@@ -80,6 +80,7 @@ export default class Post {
     // console.log(error);
     const post = {
         title: req.body.title,
+        logo: "https://via.placeholder.com/400x300.png?text=KIGALI",
         state:"draft"
     }
     queryblog
