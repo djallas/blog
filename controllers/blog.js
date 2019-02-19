@@ -142,10 +142,12 @@ export default class Post {
     queryblog
       .getPublicOne(id)
       .then(post => {
+        const topics = ['Politic','Music','Sport'];
         if(post){
           res.status(200)
           .send({
-            post:post
+            post:post,
+            topics:topics
           })
         }else{
           res
