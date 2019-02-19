@@ -53,7 +53,7 @@ header, main, footer {padding-left: 300px;}
 .b-black{border-color: #101010}
 .b-red{border-color: #c62828 }
 .b-dimgray{border-color:#696969}
-.b-lite{border-color:#adadad}
+.b-lite{border-color:#e5e5e5}
 
 /* profile avatar */
 .profile{margin: 0;width: 100%;overflow: hidden}
@@ -87,3 +87,5 @@ header, main, footer {padding-left: 300px;}
 
 .onepost{padding:15px 0;border-bottom: 1px solid #dedede;}
 .onepost .action a{padding:0 10px}
+
+.box-content{padding:5px 10px}

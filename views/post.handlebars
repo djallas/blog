@@ -12,51 +12,104 @@
    <script src="../public/js/jquery-3.2.1.min.js"></script>
    <!-- Compiled and minified JavaScript -->
    <script src="../public/js/materialize.min.js"></script>
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+   <link rel="stylesheet" href="../public/css/all.css">
+  <link rel="stylesheet" href="../public/css/simplemde.min.css">
+  <script src="../public/js/simplemde.min.js"></script>
   <style>
     textarea.materialize-textarea{height: auto;}
     .message{font-size:20px;color:#202020}
+    .container{width: 1160px}
   </style>
 </head>
 <body>
-    {{#unless error }}
-      <form class="col s12" id="updatePost" action="/" method="POST">
-        <div class="navbar-fixed">
-          <nav class="grey lighten-5 z-depth-0" style="border-bottom:1px solid #dedede">
-            <div class="container">
-              <div class="nav-wrapper">
-                <div class="row">
-                  <div class="col s2"><a href="/posts" class="btn white border b-lite z-depth-0"> <span class="fas fa-arrow-left"></span> Back</a></div>
-                  <div class="col s8 message center-align">Editing</div>
-                  <div class="col s2"><button type="submit" class="btn white border b-lite black-text z-depth-0"> <span class="fas fa-save"></span> Save</button></div>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
-        <div class="error center-align l-padding" style="background:red;color:#ffffff;display:none"></div>
+    <div class="navbar-fixed">
+      <nav class="grey lighten-5 z-depth-0" style="border-bottom:1px solid #dedede">
         <div class="container">
-          {{!-- start form --}}
-            <div class="row nm np">
-              <div class="input-field col s12 nm np">
-                <textarea id="title" name="title" class="materialize-textarea" style="font-size:35px!important;border:none!important" placeholder="Title" value="{{post.title}}">{{post.title}}</textarea>
-              </div>
-            </div> 
-            <div class="row nm np">
-              <div class="input-field col s12 nm np">
-                <textarea id="summary" name="summary" class="materialize-textarea"  style="font-size:22px!important;border:none!important"  placeholder="Summary" value="{{post.summary}}">{{post.summary}}</textarea>
-            </div>
-            <div class="row nm np">
-              <div class="input-field col s12 nm np">
-                <textarea id="content" class="materialize-textarea" value="{{post.content}}">{{post.content}}</textarea>
+          <div class="nav-wrapper">
+            <div class="row">
+              <div class="col s2"><a href="/posts" class="btn white border b-lite z-depth-0"> <span class="fas fa-arrow-left"></span> Back</a></div>
+              <div class="col s8 message center-align">Editing</div>
+              <div class="col s2 right-align"></div>
             </div>
           </div>
-          <input type="hidden" id="id" name="id" value="{{post.id}}">
-          {{!-- end form --}}
         </div>
-      </form>
+      </nav>
+    </div>
+    <div class="error center-align l-padding" style="background:red;color:#ffffff;display:none"></div>
+    {{#unless error }}
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m8 l8">          
+          <form class="row" id="updatePost" action="/" method="POST">
+                {{!-- start form --}}
+                  <div class="row nm np">
+                    <div class="input-field col s12 nm np">
+                      <textarea id="title" name="title" class="materialize-textarea" style="font-size:35px!important;border:none!important" placeholder="Title" value="{{post.title}}">{{post.title}}</textarea>
+                    </div>
+                  </div> 
+                  <div class="row nm np">
+                    <div class="input-field col s12 nm np">
+                      <textarea id="summary" name="summary" class="materialize-textarea"  style="font-size:22px!important;border:none!important"  placeholder="Summary" value="{{post.summary}}">{{post.summary}}</textarea>
+                    </div>
+                  </div>
+                  <div class="row nm np">
+                    <div class="input-field col s12 nm np">
+                        <textarea id="content" class="materialize-textarea" value="{{post.content}}">{{post.content}}</textarea>
+                    </div>
+                  </div>
+                <input type="hidden" id="id" name="id" value="{{post.id}}">
+                <button type="submit" class="btn white border b-lite black-text z-depth-0"> <span class="fas fa-save"></span> Save</button>
+            </form>
+        </div>
+        <div class="col s12 m4 l4">
+          {{!-- box --}}
+          <div class="box border grey darken-3 b-lite l-v-margin">
+            <h3 class="grey-text l-text black nm l-padding">Logo</h3>
+            <div class="box-content center">
+              <div class="image center">
+                <img src="https://via.placeholder.com/300x150.png?text=LOGO" style="border-radius:10px" alt="LOGO">
+              </div>
+              <button class="btn grey lighten-4 black-text z-depth-0" type="button">Browse image</button>
+            </div>
+          </div>          
+          {{!-- box --}}
+          
+          {{!-- box --}}
+          <div class="box border b-lite l-v-margin">
+            <h3 class="grey-text l-text grey nm lighten-4 l-padding">Genre</h3>
+            <div class="box-content">
+               <div class="chip">Politics</div>
+               <div class="chip">Sports</div>
+               <div class="chip indigo"><a href="#" class="bold white-text"> + </a></div>
+            </div>
+          </div>          
+          {{!-- box --}}
+          
+          {{!-- box --}}
+          <div class="box border b-lite l-v-margin">
+            <h3 class="grey-text l-text grey nm lighten-4 l-padding">State: Draft</h3>
+            <div class="box-content">   
+              <br>           
+              <button class="btn green darken-3 white-text z-depth-0" type="button">Publish Online</button>
+              <br>
+            </div>
+          </div>          
+          {{!-- box --}}
+          
+          {{!-- box --}}
+          <div class="box red lighten-5 border b-lite l-v-margin">
+            <h3 class="grey-text text-darken-1 l-text red lighten-5  nm lighten-4 l-padding">Danger zone</h3>
+            <div class="box-content">   
+              <br>           
+              <button class="btn red darken-3 white-text z-depth-0" type="button">Delete Post</button>
+              <br>
+            </div>
+          </div>          
+          {{!-- box --}}
+
+        </div>
+      </div>
+    </div>
     {{else}}
     <div class="container">
       <div class="row center-align">
