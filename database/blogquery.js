@@ -37,6 +37,7 @@ const deletePost = blogID => Posts()
 // Public API Query
 const getPulicAll = () => Posts()
   .select()
+  .column('id','title','summary','content','logo','state','created_at')
   // .where('state','online')
   .orderBy('id', 'desc')
 ;
