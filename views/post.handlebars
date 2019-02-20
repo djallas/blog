@@ -140,7 +140,7 @@
         $("#err").html("Uploading...").show();      
         e.preventDefault();
         $.ajax({
-            url: "http://localhost:3000/upload/{{post.id}}",
+            url: "https://kigali.herokuapp.com/upload/{{post.id}}",
             type: "POST",
             data:  new FormData(this),
             contentType: false,
