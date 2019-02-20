@@ -63,14 +63,20 @@
         </div>
         <div class="col s12 m4 l4">
           {{!-- box --}}
-          <div class="box border grey darken-3 b-lite l-v-margin">
-            <h3 class="grey-text l-text black nm l-padding">Logo</h3>
+          <div class="box border grey darken-3 b-lite l-v-margin" style="padding-bottom:0!important">
+            <h3 class="grey-text l-text black nm l-padding">LOGO IMAGE</h3>
             <div class="box-content center">
               <div class="image center">
-                <img src="https://via.placeholder.com/300x150.png?text=LOGO" style="border-radius:10px" alt="LOGO">
+                <img src="https://via.placeholder.com/300x150.png?text=LOGO" class="z-depth-4"  id="output" style="width:100%;height:auto;border-radius:10px" alt="LOGO">
               </div>
-              <button class="btn grey lighten-4 black-text z-depth-0" type="button">Browse image</button>
             </div>
+
+            <form id="form" action="/" class="grey darken-2" style="padding:10px 15px" method="post" enctype="multipart/form-data">
+              <input id="uploadImage" type="file" accept="image/*" name="upfile" onchange="loadFile(event)" />
+              <input type="submit" style="border:0;padding:3px 8px;margin:5px 0" class="white" value="Upload">
+            </form>
+            <div class="clear"></div>
+            <div id="err" class="white-text" style="border:0;padding:3px 8px;"></div>
           </div>          
           {{!-- box --}}
           
@@ -127,5 +133,44 @@
     var simplemde = new SimpleMDE({ element: document.getElementById("content") });
     </script>
     <script src="../public/js/put.js"></script>
+    <script>
+      $(document).ready(function (e) {
+      $("#form").on('submit',(function(e) {
+        ///uploading...  
+        $("#err").html("Uploading...").show();      
+        e.preventDefault();
+        $.ajax({
+            url: "http://localhost:3000/upload/{{post.id}}",
+            type: "POST",
+            data:  new FormData(this),
+            contentType: false,
+                  cache: false,
+            processData:false,
+            beforeSend : function()
+            {
+              $("#preview").hide();
+              $("#err").hide();
+            },
+            success: function(data){
+              if(data=='invalid')
+              {
+                $("#err").html("Invalid File!").show();
+              }else{
+                $("#err").html(data).show();
+                $("#preview").html(data).show();
+                $("#form")[0].reset(); 
+              }
+            },
+            error: function(e){
+              $("#err").html(e).show();
+            }          
+          });
+        }));
+      });
+      var loadFile = function(event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+      };
+    </script>
 </body>
 </html>

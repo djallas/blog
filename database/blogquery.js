@@ -26,6 +26,11 @@ const update = (post) => Posts()
   .where('id', post.id)
   .update(post);
 
+// save logo post
+const updateLogoPost = (image) => Posts()
+  .where('id', image.id)
+  .update(image);
+
 // create a new blog post
 const create = blog => Posts()
 .insert(blog, ['id','title']);
@@ -55,4 +60,5 @@ module.exports = {
   update,
   getPulicAll,
   getPublicOne,
+  updateLogoPost
 };

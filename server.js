@@ -23,6 +23,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+const upload = require('express-fileupload');
+app.use(upload())
 // calling routes
 import routers from './routes/router';
 // register routes

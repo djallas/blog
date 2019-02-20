@@ -2,6 +2,7 @@
 import express from 'express';
 import Post from '../controllers/blog';
 import User from '../controllers/user';
+import Image from '../controllers/image';
 import passport  from 'passport';
 
 import passportSetup from '../config/passport-setup';
@@ -51,6 +52,11 @@ router.put('/posts', Post.updatePost);
 router.get('/v1/posts', Post.getPublicAllPosts);
 router.get('/v1/posts/:id', Post.getPublicOnePost);
 // router.get('/v1/posts/:id/genre', Post.getPublicPostsOfGenre);
+
+
+// UPLOAD IMAGES
+router.post('/upload/:id', authCheck, Image.uploadImage);
+
 // #END Public Endpoints for the App
 //Passport
 router.get('/login', (req, res) =>{
